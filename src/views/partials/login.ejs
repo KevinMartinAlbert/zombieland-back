@@ -1,0 +1,31 @@
+<div class="login-container">
+  <h2>Login</h2>
+  <form action="/admin/login" method="POST" class="login-form">
+    <!-- Champ pour l'email -->
+    <div class="form-group">
+      <label for="email">Email:</label>
+      <input
+        type="email"
+        id="email"
+        name="email"
+        value="admin@zombieland.fr"
+        required
+      />
+    </div>
+
+    <!-- Champ pour le mot de passe -->
+    <div class="form-group">
+      <label for="password">Password:</label>
+      <input
+        type="password"
+        id="password"
+        name="password"
+        value="password"
+        required
+      />
+    </div>
+
+    <!-- Bouton de soumission -->
+    <button type="submit" class="btn">Login</button>
+  </form>
+</div>

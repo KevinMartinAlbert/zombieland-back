@@ -13,7 +13,8 @@ async function seedDatabase() {
             { user_id: 7, first_name: 'Gabrielle', last_name: 'Roux', email: 'gabrielle.roux@example.com', password: 'escape1234', role: 'user', created_at: '2024-08-21 08:05:00' },
             { user_id: 8, first_name: 'Hugo', last_name: 'Schmitt', email: 'hugo.schmitt@example.com', password: 'scream567', role: 'user', created_at: '2024-08-22 17:30:45' },
             { user_id: 9, first_name: 'Inès', last_name: 'Bernard', email: 'ines.bernard@example.com', password: 'darknight678', role: 'user', created_at: '2024-08-23 13:15:25' },
-            { user_id: 10, first_name: 'Julien', last_name: 'Dubois', email: 'julien.dubois@example.com', password: 'survivor890', role: 'user', created_at: '2024-08-24 09:45:15' }
+            { user_id: 10, first_name: 'Julien', last_name: 'Dubois', email: 'julien.dubois@example.com', password: 'survivor890', role: 'user', created_at: '2024-08-24 09:45:15' },
+            { user_id: 11, first_name: 'Admin', last_name: 'Parc', email: 'admin@zombieland.fr', password: 'c15df46f39e02b6590fd25ff798d9508cc7b5c0e40b191e969f805cdd111725bb5d93c9ab194e0beaa5a5b3571d0f4edb00a210ee81dccb6e9fe448c8825769f.2f31dbbd1b7f63653d9a077b377672ef', role: 'admin', created_at: '2024-08-24 09:45:15' },
         ]);
         
         const bookings = await Booking.bulkCreate([
@@ -164,6 +165,27 @@ async function seedDatabase() {
             { category_id: 2, name: 'Deadly Trials' },
             { category_id: 3, name: 'Extreme Survival' }
         ]);
+
+        // Add associations using direct IDs or helper methods
+        // For example, you can use setCategories on each activity
+        await activities[0].setCategories([0]);
+        await activities[1].setCategories([3]);
+        await activities[2].setCategories([2]);
+        await activities[3].setCategories([0]);
+        await activities[4].setCategories([1]);
+        await activities[5].setCategories([1]);
+        await activities[6].setCategories([3]);
+        await activities[7].setCategories([2]);
+        await activities[8].setCategories([0]);
+        await activities[9].setCategories([1]);
+        await activities[10].setCategories([0]);
+        await activities[11].setCategories([1]);
+
+        // Synchronisation des séquences pour chaque table après insertion
+        await sequelize.query(`SELECT setval(pg_get_serial_sequence('public.user', 'user_id'), COALESCE((SELECT MAX(user_id) FROM public.user) + 1, 1), false)`);
+        await sequelize.query(`SELECT setval(pg_get_serial_sequence('booking', 'booking_id'), COALESCE((SELECT MAX(booking_id) FROM booking) + 1, 1), false)`);
+        await sequelize.query(`SELECT setval(pg_get_serial_sequence('activity', 'activity_id'), COALESCE((SELECT MAX(activity_id) FROM activity) + 1, 1), false)`);
+        await sequelize.query(`SELECT setval(pg_get_serial_sequence('category', 'category_id'), COALESCE((SELECT MAX(category_id) FROM category) + 1, 1), false)`);
 
     } catch (error) {
         console.error(`Une erreur est survenue pendant la création des données`, error);

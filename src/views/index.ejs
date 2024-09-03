@@ -1,0 +1,8 @@
+<%- include('./partials/header') %>
+<%- include('./partials/side-menu') %>
+<% if (locals.loggedUser?.role !== 'admin') { %>
+    <%- include('./partials/login') %>
+<% } else if (locals.loggedUser?.role === 'admin') { %>
+    <h2>Bienvenue <%= locals.loggedUser?.first_name %> sur le panel d'administration
+<% } %>
+<%-include('./partials/footer') %>

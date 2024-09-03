@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/css/reset.min.css" />
+    <link rel="stylesheet" href="/css/style.css" />
+    <link href="/css/font/font.css" rel="stylesheet" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=League+Gothic&display=swap"
+      rel="stylesheet"
+    />
+    <title>Panneau d'administration</title>
+  </head>
+  <body>
+    <div class="header">
+      <div class="title">ZombieLand</div>
+      <% if (locals.loggedUser?.role === 'admin') { %>
+        <div class="connected-infos">
+          <p>Connecté en tant que " <%= locals.loggedUser?.first_name %> "</p>
+          <a href="/admin/logout">Se deconnecter</a>
+        </div>
+      <% } %>
+    </div>
+  </body>
+</html>

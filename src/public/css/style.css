@@ -1,0 +1,191 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    overflow-x: hidden;
+    /* Empêche le défilement horizontal */
+    font-family: 'League Gothic', sans-serif;
+    font-size: 1.7rem;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.title {
+    width: 250px;
+    color: white;
+    font-family: 'bad_grungeregular';
+    font-size: 3rem;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    background-color: #000000;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    height: 25px;
+    color: white;
+    z-index: 10;
+    padding: 1rem;
+    padding-left: 2.5rem;
+}
+
+/* Style du side menu */
+.side-menu {
+    height: 100%;
+    /* Hauteur pleine page */
+    width: 250px;
+    /* Largeur fixe du menu latéral */
+    position: absolute;
+    /* Fixé à gauche */
+    top: 0;
+    left: 0;
+    /* Toujours visible sur la gauche */
+    background-color: #000000;
+    /* Couleur de fond du menu */
+    overflow-y: auto;
+    /* Activer le défilement vertical */
+    padding-top: 80px;
+    /* Espace supérieur pour le contenu */
+    text-align: center;
+}
+
+/* Style des liens du menu */
+.side-menu a {
+    padding: 15px 20px;
+    text-decoration: none;
+    font-size: 1.6rem;
+    color: #fff;
+    display: block;
+    transition: 0.3s;
+}
+
+/* Effet au survol des liens */
+.side-menu a:hover {
+    background-color: #000000;
+}
+
+.connected-infos {
+    padding-top: 0;
+    margin-top: 0;
+    width: 250px;
+    font-size: medium;
+    text-align: right;
+}
+
+.connected-infos a {
+    padding-top: 2rem;
+    color: #C90000;
+}
+
+.connected-infos a:hover {
+    color: #ec7f7f;
+}
+
+.sideMenuLinks {
+    background-color: #C90000;
+
+}
+
+.panel {
+    position: absolute;
+    display: flex;
+    flex-wrap: wrap;
+    left: 260px;
+    right: 10px;
+    top: 65px;
+    background-color: #f0f0f0;
+    border-radius: 7px;
+}
+
+.panel h2 {
+    padding: 0.5rem;
+    font-size: 1.3rem;
+    font-weight: 500;
+    flex-basis: 100%;
+}
+
+.primaryPanel {
+    background-color: #ccc;
+    margin: 0.5rem;
+    padding: 0.5rem;
+    margin-top: 0;
+    flex-grow: 1;
+    min-height: 500px;
+    border-radius: 7px;
+    font-size: 1rem;
+}
+
+.secondaryPanel {
+    position: absolute;
+    left: 50%;
+    top: 45px;
+    background-color: #ffffff;
+    margin: 0.5rem;
+    padding: 0.5rem;
+    margin-top: 0;
+    min-height: 486px;
+    flex-grow: 1;
+    border-radius: 7px;
+}
+
+.login-container {
+    background-color: #f0f0f0;
+    padding: 40px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.452);
+    width: 300px;
+    text-align: center;
+}
+
+.login-container h2 {
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.form-group {
+    margin-bottom: 15px;
+    text-align: left;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    color: #333;
+    font-size: 14px;
+}
+
+.form-group input {
+    width: calc(100% - 20px);
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+    box-sizing: border-box;
+}
+
+.btn {
+    background-color: #C90000;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin-top: 10px;
+    cursor: pointer;
+    border-radius: 4px;
+    width: 100%;
+}
+
+.btn:hover {
+    background-color: #9e0202;
+}
