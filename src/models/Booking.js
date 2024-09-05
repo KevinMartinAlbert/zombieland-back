@@ -16,6 +16,7 @@ Booking.init(
     status: {
       type: DataTypes.TEXT,
       allowNull: false,
+      defaultValue: 'pending',
     },
     nb_tickets: {
       type: DataTypes.INTEGER,
@@ -33,4 +34,3 @@ Booking.init(
 );
 
 export default Booking;
-

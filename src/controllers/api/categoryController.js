@@ -1,59 +1,108 @@
-import { z } from 'zod';
-import { Category } from '../../models/index.js'
-
-const categorySchema = z.object({
-    name: z.string().min(1),
-});
+import { Category, Activity } from '../../models/index.js';
 
 const categoryController = {
-    async getAll(req, res) {
-        const listAll = await Category.findAll();
-        res.json(listAll);
-    },
+  async getAll(req, res) {
+    try {
+      const categories = await Category.findAll({
+        order: [['name', 'ASC']],
+      });
+      res.json(categories);
+    } catch (error) {
+      console.error('Erreur lors de la récupération des catégories:', error);
+      res.status(500).json({
+        error: 'Une erreur est survenue lors de la récupération des catégories',
+      });
+    }
+  },
 
-    async getOne(req, res) {
-        const id = req.params.id;
-        const oneCategory = await Category.findByPk(id);
+  async getOneCategory(req, res) {
+    try {
+      const categoryId = req.params.id;
+      const category = await Category.findByPk(categoryId, {
+        include: [
+          {
+            model: Activity,
+            as: 'activities',
+            attributes: ['activity_id', 'name', 'description_short'],
+            through: { attributes: [] },
+          },
+        ],
+      });
 
-        if(!oneCategory) {
-            throw new Error(`Nous n'avons pas trouvé cette catégorie`);
-        };
+      if (!category) {
+        return res.status(404).json({ error: 'Category not found' });
+      }
 
-        res.json(oneCategory);
-    },
+      res.json(category);
+    } catch (error) {
+      console.error('Erreur lors de la récupération de la catégorie:', error);
+      res.status(500).json({
+        error: 'An error occurred while fetching the category',
+      });
+    }
+  },
 
-    async create(req, res) {
-        const categoryCreated = categorySchema.parse(req.body);
-        const category = await Category.create(categoryCreated);
-        res.status(201).json(category);
-    },
+  async createCategory(req, res) {
+    try {
+      const { name } = req.body;
 
-    async update(req, res) {
-        const id = req.params.id;
-        data = req.body;
-        const oneCategory = await Category.findByPk(id);
+      if (!name) {
+        return res.status(400).json({ error: 'Name is required' });
+      }
 
-        if(!oneCategory) {
-            throw new Error(`Nous n'avons pas trouvé cette catégorie`);
-        };
+      const newCategory = await Category.create({ name });
+      res.status(201).json(newCategory);
+    } catch (error) {
+      console.error('Erreur lors de la création de la catégorie:', error);
+      res.status(500).json({
+        error: 'An error occurred while creating the category',
+      });
+    }
+  },
 
-        await oneCategory.update(data);
-        res.json(oneCategory);
-    },
+  async updateCategory(req, res) {
+    try {
+      const categoryId = req.params.id;
+      const { name } = req.body;
 
-    async delete(req, res) {
-        const id = req.params.id;
-        const oneCategory = await Category.findByPk(id);
+      const category = await Category.findByPk(categoryId);
 
-        if(!oneCategory) {
-            throw new Error(`Nous n'avons pas trouvé cette catégorie`);
-        };
+      if (!category) {
+        return res.status(404).json({ error: 'Category not found' });
+      }
 
-        await oneCategory.destroy();
-        res.status(204).send();
-    },
+      if (name) {
+        category.name = name;
+      }
 
+      await category.save();
+      res.json(category);
+    } catch (error) {
+      console.error('Erreur lors de la mise à jour de la catégorie:', error);
+      res.status(500).json({
+        error: 'An error occurred while updating the category',
+      });
+    }
+  },
+
+  async deleteCategory(req, res) {
+    try {
+      const categoryId = req.params.id;
+      const category = await Category.findByPk(categoryId);
+
+      if (!category) {
+        return res.status(404).json({ error: 'Category not found' });
+      }
+
+      await category.destroy();
+      res.status(204).send();
+    } catch (error) {
+      console.error('Erreur lors de la suppression de la catégorie:', error);
+      res.status(500).json({
+        error: 'An error occurred while deleting the category',
+      });
+    }
+  },
 };
 
-
-export default categoryController
+export default categoryController;

@@ -14,7 +14,6 @@ router.use('/activities', activityRouter);
 router.use('/booking', bookingRouter);
 router.use('/account', userRouter);
 router.use('/category', categoryRouter);
-
 router.use('/signin', signinRouter);
 router.use('/login', loginRouter);
 

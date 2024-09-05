@@ -32,6 +32,10 @@ User.init(
       allowNull: false,
       defaultValue: 'user',
     },
+    resetToken: {
+      type: DataTypes.TEXT,
+      allowNull: true,
+    },
   },
   {
     sequelize,

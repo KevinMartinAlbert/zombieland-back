@@ -22,6 +22,7 @@ Activity.init(
       type: DataTypes.TEXT,
       allowNull: false,
     },
+
     minimal_age: {
       type: DataTypes.INTEGER,
       allowNull: false,
@@ -30,6 +31,7 @@ Activity.init(
       type: DataTypes.INTEGER,
       allowNull: false,
     },
+
     x: {
       type: DataTypes.INTEGER,
       allowNull: false,

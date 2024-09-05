@@ -1,31 +1,57 @@
-<div class="login-container">
-  <h2>Login</h2>
-  <form action="/admin/login" method="POST" class="login-form">
-    <!-- Champ pour l'email -->
-    <div class="form-group">
-      <label for="email">Email:</label>
-      <input
-        type="email"
-        id="email"
-        name="email"
-        value="admin@zombieland.fr"
-        required
-      />
-    </div>
+<div class="container mt-6">
+  <div class="columns is-centered">
+    <div class="column is-4-desktop is-6-tablet">
+      <div class="login-container box has has-background-black mt-6">
+        <h2 class="title is-size-2 has-text-centered has-text-danger-45">
+          Login
+        </h2>
+        <form action="/admin/login" method="POST" class="login-form">
+          <!-- Champ Email -->
+          <div class="field">
+            <label class="label is-size-4" for="email">Email:</label>
+            <div class="control has-icons-left">
+              <input
+                class="input"
+                type="email"
+                id="email"
+                name="email"
+                placeholder="Entrez votre email"
+                value="admin@zombieland.fr"
+                required
+              />
+              <span class="icon is-small is-left">
+                <i class="fas fa-envelope"></i>
+              </span>
+            </div>
+          </div>
 
-    <!-- Champ pour le mot de passe -->
-    <div class="form-group">
-      <label for="password">Password:</label>
-      <input
-        type="password"
-        id="password"
-        name="password"
-        value="password"
-        required
-      />
-    </div>
+          <!-- Champ Mot de passe -->
+          <div class="field">
+            <label class="label" for="password">Mot de passe:</label>
+            <div class="control has-icons-left">
+              <input
+                class="input"
+                type="password"
+                id="password"
+                name="password"
+                placeholder="Entrez votre mot de passe"
+                value="password"
+                required
+              />
+              <span class="icon is-small is-left">
+                <i class="fas fa-lock"></i>
+              </span>
+            </div>
+          </div>
 
-    <!-- Bouton de soumission -->
-    <button type="submit" class="btn">Login</button>
-  </form>
+          <!-- Bouton de soumission -->
+          <div class="field mt-5 has-text-centered">
+            <button type="submit" class="button is-primary">
+              Se connecter
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
 </div>

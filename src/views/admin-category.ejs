@@ -1,8 +1,35 @@
 <%- include('partials/header') %>
-<div class="panel">
-  <h2>Gestion des categories</h2>
-  <div class="primaryPanel">
-    <div class="secondaryPanel">Panel secondaire</div>
+<div class="container mt-6">
+  <div class="panel">
+    <p class="panel-heading has-background-danger-45 has-text-white has-text-weight-light">
+      Gestion des catégories</p>
   </div>
+  <!-- Conteneur de la liste des catégories -->
+
+  <div class="panel-block">
+    <div class="box column is-two-thirds" style="height: 60vh; overflow-y: auto;">
+      <ul>
+        <% categories.forEach(category =>{ %>
+
+        <li class="box has-background-light is-size-5 p-2 mb-2 reservation-item">
+          <div class="is-flex is-justify-content-space-between is-align-items-center">
+            <!-- Informations sur la catégorie -->
+            <div class="is-flex is-align-items-center">
+              <p class="has-text-weight-medium has-text-black mr-4">
+                #<span class="has-text-danger-45"><%= category.category_id %></span>
+              </p>
+              <p class="mr-4 has-text-black">
+                <span class="has-text-weight-medium has-text-danger-45"><%= category.name %></span>
+              </p>
+            </div>
+        </li>
+        <% }) %>
+      </ul>
+    </div>
+  </div>
+
+
+
+
 </div>
 <%- include('partials/side-menu') %>

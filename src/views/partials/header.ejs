@@ -3,24 +3,55 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="/css/reset.min.css" />
-    <link rel="stylesheet" href="/css/style.css" />
+    <!-- Uncomment these lines if you need to include custom styles -->
+    <!-- <link rel="stylesheet" href="/css/reset.min.css" /> -->
     <link href="/css/font/font.css" rel="stylesheet" />
     <link
       href="https://fonts.googleapis.com/css2?family=League+Gothic&display=swap"
       rel="stylesheet"
     />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bulma@1.0.2/css/bulma.min.css"
+    >
+    <link rel="stylesheet" href="/css/style.css" />
+    <script src="/js/script.js"></script>
     <title>Panneau d'administration</title>
   </head>
-  <body>
-    <div class="header">
-      <div class="title">ZombieLand</div>
-      <% if (locals.loggedUser?.role === 'admin') { %>
-        <div class="connected-infos">
-          <p>Connecté en tant que " <%= locals.loggedUser?.first_name %> "</p>
-          <a href="/admin/logout">Se deconnecter</a>
-        </div>
-      <% } %>
+  <body style="overflow-x: auto;">
+    <% if (locals.errorMessage) { %>
+     <div id="error-tooltip" class="notification is-danger <%= locals.errorMessage ? '' : 'is-hidden' %>">
+      <%= locals.errorMessage %>
     </div>
-  </body>
-</html>
+    <%= locals.errorMessage = null %>
+    <% } %>
+    <% if (locals.successMessage) { %>
+      <div id="success-tooltip" class="notification is-success <%= locals.successMessage ? '' : 'is-hidden' %>">
+       <%= locals.successMessage %>
+     </div>
+     <%= locals.successMessage = null %>
+     <% } %>
+    
+  
+    <!-- Header using Bulma's navbar component -->
+    <nav class="navbar has-background-black is-fixed-top is-flex is-justify-content-flex-start" style="height: 20px;" role="navigation" aria-label="main navigation">
+      <div class="navbar-brand">
+        <a class="navbar-item" href="#">
+          <!-- Using a custom font for the title as per your provided image -->
+          <span class="badgrunge pl-5" >ZombieLand</span>
+        </a>
+      </div>
+
+      <% if (locals.loggedUser?.role === 'admin') { %>
+      <div class="navbar-menu">
+        <button id="menu-toggle" class="button is-hidden" style="position: fixed; top: 10px; left: 10px; z-index: 1000;">Menu</button>
+        <div class="navbar-end">
+          <div class="navbar-item">
+            <!-- User information and logout link -->
+            <p class="mr-4">Connecté en tant que "<strong><%= locals.loggedUser?.first_name %></strong>"</p>
+            <a class="button is-light" href="/admin/logout">Se déconnecter</a>
+          </div>
+        </div>
+      </div>
+      <% } %>
+    </nav>
