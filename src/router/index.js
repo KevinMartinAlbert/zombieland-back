@@ -6,6 +6,7 @@ import categoryRouter from './category.js';
 import userRouter from './user.js';
 import loginRouter from './login.js';
 import signinRouter from './signin.js';
+import contactRouter from './contact.js';
 
 const router = Router();
 
@@ -16,5 +17,6 @@ router.use('/account', userRouter);
 router.use('/category', categoryRouter);
 router.use('/signin', signinRouter);
 router.use('/login', loginRouter);
+router.use('/contact', contactRouter);
 
 export default router;

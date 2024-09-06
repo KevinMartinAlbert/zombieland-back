@@ -93,10 +93,12 @@ const userController = {
       from: process.env.MAIL,
       to: email,
       subject: 'Password Reset',
-      text: `Quelqu'un – peut-être vous – demande un nouveau mot de passe pour ZombieLand.\n
+      text: `Bonjour,\n
+      \n
+      Quelqu'un – peut-être vous – demande un nouveau mot de passe pour ZombieLand.\n
       Pour confirmer ce changement de mot de passe, cliquez sur ce lien :\n
       \n
-      ${process.env.VITE_API_URL}/new-password?token=${resetToken}\n
+      ${process.env.FRONT_URL}/new-password?token=${resetToken}\n
       \n
       Sinon, merci d'ignorer cet e-mail.\n
       \n
@@ -110,6 +112,7 @@ const userController = {
 
     transporter.sendMail(mailOptions, (error, info) => {
       if (error) {
+        console.log("Erreur lors de l'envoi de l'email :", error);
         return res.status(500).json({ error: 'Error sending email' });
       }
       res.status(200).json({ message: 'Reset email sent' });
